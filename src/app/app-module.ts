@@ -10,6 +10,8 @@ import { FormsModule } from '@angular/forms';
 import { provideHttpClient } from '@angular/common/http';
 import { ServiceEmpleados } from './services/service.empleados';
 import { LoginComponent } from './components/login-component/login-component';
+import { AuthGuard } from './guards/auth-guard';
+import { EjemploSignalComponent } from './components/ejemplo-signal-component/ejemplo-signal-component';
 
 @NgModule({
   declarations: [
@@ -19,9 +21,15 @@ import { LoginComponent } from './components/login-component/login-component';
     PerfilComponent,
     SubordinadosComponent,
     LoginComponent,
+    EjemploSignalComponent,
   ],
   imports: [BrowserModule, AppRoutingModule, FormsModule],
-  providers: [provideBrowserGlobalErrorListeners(), provideHttpClient(), ServiceEmpleados],
+  providers: [
+    provideBrowserGlobalErrorListeners(),
+    provideHttpClient(),
+    ServiceEmpleados,
+    AuthGuard,
+  ],
   bootstrap: [App],
 })
 export class AppModule {}

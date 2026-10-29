@@ -1,6 +1,7 @@
 import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { Empleado } from '../../models/empleado';
 import { ServiceEmpleados } from '../../services/service.empleados';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-perfil-component',
@@ -13,11 +14,20 @@ export class PerfilComponent implements OnInit {
 
   constructor(
     private _cdr: ChangeDetectorRef,
-    private _service: ServiceEmpleados
-  ){}
+    private _service: ServiceEmpleados,
+    private _router: Router
+  ) { }
 
   async ngOnInit(): Promise<void> {
     this.empleado = await this._service.getPerfilEmpleadoAsync();
     this._cdr.detectChanges();
+
+    // Esto es anterior a los guards
+    // if (sessionStorage.getItem("TOKEN") == null) {
+    //   this._router.navigate(["/login"])
+    // } else {
+    //   this.empleado = await this._service.getPerfilEmpleadoAsync();
+    //   this._cdr.detectChanges();
+    // }
   }
 }
